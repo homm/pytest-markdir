@@ -1,0 +1,39 @@
+name: tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pytest-version:
+          - "6.2.*"
+          - "7.0.*"
+          - "7.1.*"
+          - "7.2.*"
+          - "7.3.*"
+          - "7.4.*"
+          - "8.0.*"
+          - "8.1.*"
+          - "8.2.*"
+          - "8.3.*"
+          - "8.4.*"
+          - "9.0.*"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install . "pytest==${{ matrix.pytest-version }}"
+
+      - name: Run tests
+        run: pytest

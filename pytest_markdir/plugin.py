@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 def pytest_collection_modifyitems(session, config, items):
     for item in items:
         for conftest in _iter_conftests(item):
@@ -15,4 +18,4 @@ def _get_conftest_marks(conftest):
 
 def _iter_conftests(item):
     manager = item.config.pluginmanager
-    return manager._getconftestmodules(item.fspath)
+    return manager._getconftestmodules(Path(item.fspath))

@@ -79,4 +79,4 @@ During collection, the plugin finds every `conftest.py` that applies to a test i
 
 ## License
 
-MIT
+MIT. See `LICENSE`.
